@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+
 const productSchema = mongoose.Schema({
     title:{
         type: String,
@@ -16,8 +17,16 @@ const productSchema = mongoose.Schema({
         default: 150
     },
     // img:{},
-    // userId:{},
-    // categoryId:{},
+    userId:{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "User" // relation to user model
+    },
+    // categoryId:{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     required: true,
+    //     ref: "Category"
+    // },
 },{
     timestamps: true
 })

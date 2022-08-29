@@ -12,7 +12,10 @@ class Product{
     }
     static addProduct = async(req, res)=>{
         try {
-            const productData = new productModel(req.body)
+            const productData = new productModel({
+                userId: req.user._id,
+                ...req.body
+            })
             await productData.save()
             res.send({apiStatus: true, message: "product added", data: productData})
         } 
@@ -49,6 +52,26 @@ class Product{
         catch (e) {
             res.send({apiStatus: false, message: e.message, data: e})
         }
+    }
+    static getMyProducts = async(req,res)=>{
+        try {
+            const data = await productModel.find({userId:req.user._id})
+            res.send({apiStatus: true, message: "My products fetched", data})
+        } 
+        catch (e) {
+            res.send({apiStatus: false, message: e.message, data: e})
+        }
+
+    }    
+    static myProducts = async(req,res)=>{
+        try {
+            await req.user.populate("myProducts")
+            res.send({apiStatus: true, message: "My products fetched", data: req.user.myProducts})
+        } 
+        catch (e) {
+            res.send({apiStatus: false, message: e.message, data: e})
+        }
+
     }    
 }
 

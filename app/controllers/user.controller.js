@@ -70,9 +70,42 @@ class User{
     }
     static logout = async(req, res)=>{
         try {
-            const userData = await userModel.login(req.body.email, req.body.password)
-            const token = await userData.generateToken()
-            res.status(200).send({apiStatus: true, message: "user logged in", data: {userData, token}})
+            req.user.tokens = req.tokens.filter(t => t.token != req.token)
+            await req.user.save()
+            res.status(200).send({apiStatus: true, message: "user logged out", data: {userData, token}})
+        } 
+        catch (e) {
+            res.status(500).send({apiStatus: false, message: e.message, data: e})
+        }
+    }
+    static logoutAll = async(req, res)=>{
+        try {
+            req.user.tokens = []
+            await req.user.save()
+            res.status(200).send({apiStatus: true, message: "user logged out from all sessions", data: {userData, token}})
+        } 
+        catch (e) {
+            res.status(500).send({apiStatus: false, message: e.message, data: e})
+        }
+    }
+    static editMyProfile = async(req, res)=>{
+        try {
+            for(let prop in req.body){
+                req.user[prop] = req.body[prop]
+            }
+            await req.user.save()
+            res.status(200).send({apiStatus: true, message: "Profile edited", data: req.user})
+        } 
+        catch (e) {
+            res.status(500).send({apiStatus: false, message: e.message, data: e})
+        }
+    }
+
+    static uploadImg = async(req, res)=>{
+        try {
+            req.user.userImg = req.file.filename
+            await req.user.save()
+            res.status(200).send({apiStatus: true, message: "Image uploaded", data: req.user})
         } 
         catch (e) {
             res.status(500).send({apiStatus: false, message: e.message, data: e})

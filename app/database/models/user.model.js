@@ -50,6 +50,9 @@ const userSchema = mongoose.Schema({
         lowercase:true,
         enum:["male", "female"]
     },
+    userImg:{
+        type: String
+    },
     tokens:[
         {
             token:{
@@ -62,8 +65,15 @@ const userSchema = mongoose.Schema({
     timestamps: true
 })
 
+// relation with products model with userId
+userSchema.virtual("myProducts", {
+    ref: "Product", // name of the ralated model
+    localField: "_id",
+    foreignField: "userId"
+})
+
 userSchema.methods.toJSON = function(){
-    const deleted =["__v", "password"]
+    const deleted =["__v", "password", "tokens"]
     const userData = this.toObject() // to deal with js functions of objects like (delete)
     deleted.forEach(d => delete userData[d])
     return userData
