@@ -1,0 +1,16 @@
+const express = require("express")
+const app = express()
+
+require("./database/connect") //connect to database
+
+app.use(express.json()) // deal with json data
+app.use(express.urlencoded({extended:true})) // to read post form, deal with imgs
+
+const userRoutes = require("./routes/user.routes")
+const productRoutes = require("./routes/product.routes")
+const categoryRoutes = require("./routes/category.routes")
+app.use("/user", userRoutes)
+app.use("/product", productRoutes)
+app.use("/category", categoryRoutes)
+
+module.exports = app
