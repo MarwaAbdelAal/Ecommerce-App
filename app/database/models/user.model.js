@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 const validator = require("validator")
 const bcryptjs = require("bcryptjs")
+const jwt = require("jsonwebtoken")
 
 const userSchema = mongoose.Schema({
     name:{
@@ -49,6 +50,14 @@ const userSchema = mongoose.Schema({
         lowercase:true,
         enum:["male", "female"]
     },
+    tokens:[
+        {
+            token:{
+                type: String,
+                required: true
+            }
+        }
+    ]
 },{
     timestamps: true
 })
@@ -66,6 +75,22 @@ userSchema.pre("save", async function(){
     if(userData.isModified("password"))
         userData.password = await bcryptjs.hash(userData.password, 10)
 })
+
+userSchema.statics.login = async(email, password)=>{
+    const userData = await User.findOne({email})
+    if(!userData) throw new Error("invalid email")
+    const matched = await bcryptjs.compare(password, userData.password)
+    if(!matched) throw new Error("invalid password")
+    return userData
+}
+
+userSchema.methods.generateToken = async function(){
+    const user = this
+    const token = jwt.sign({_id:user._id}, process.env.JWTKEY)
+    user.tokens = user.tokens.concat({token})
+    await user.save()
+    return token
+}
 
 const User = mongoose.model("User", userSchema)
 module.exports = User
