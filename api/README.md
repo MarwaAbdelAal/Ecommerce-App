@@ -1,1 +1,1 @@
-# Ecommerce-API
+# Ecommerce-Application using MEAN stack
