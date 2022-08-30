@@ -1,6 +1,8 @@
 const express = require("express")
+const cors = require("cors")
 const app = express()
 
+app.use(cors())
 require("./database/connect") //connect to database
 
 app.use(express.json()) // deal with json data
