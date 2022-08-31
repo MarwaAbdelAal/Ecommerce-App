@@ -27,14 +27,13 @@ const userSchema = mongoose.Schema({
         trim:true,
         required:true,
         minlength:6,
-        // match:/^(?=.*[a-z])(?=.*[0-9])$/,
         validate(value){
             if(
                 value.includes("password")|| 
                 value.includes("123")||
                 value.includes(this.name)
                 )
-                throw new Error("week password")
+                throw new Error("weak password")
         }
     },
     age:{
@@ -73,7 +72,8 @@ userSchema.virtual("myProducts", {
 })
 
 userSchema.methods.toJSON = function(){
-    const deleted =["__v", "password", "tokens"]
+    // const deleted =["__v", "password", "tokens"]
+    const deleted =["__v", "password"]
     const userData = this.toObject() // to deal with js functions of objects like (delete)
     deleted.forEach(d => delete userData[d])
     return userData

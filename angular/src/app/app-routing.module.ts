@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 import { AddproductComponent } from './pages/product/addproduct/addproduct.component';
 import { AllproductsComponent } from './pages/product/allproducts/allproducts.component';
 import { MyproductsComponent } from './pages/product/myproducts/myproducts.component';
@@ -11,7 +12,7 @@ import { RegisterComponent } from './pages/user/register/register.component';
 import { SingleuserComponent } from './pages/user/singleuser/singleuser.component';
 
 const routes: Routes = [
-  // {path: "", component:home},
+  {path: "", component:HomeComponent},
   {path: "user", children:[
     {path:"", component:AllusersComponent},
     {path:"register", component:RegisterComponent},

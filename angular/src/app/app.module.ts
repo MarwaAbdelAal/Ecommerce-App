@@ -19,6 +19,7 @@ import { EditproductComponent } from './pages/product/editproduct/editproduct.co
 import { MyproductsComponent } from './pages/product/myproducts/myproducts.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { FooterComponent } from './shared/footer/footer.component';
     EditproductComponent,
     MyproductsComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

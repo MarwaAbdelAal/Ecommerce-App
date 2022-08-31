@@ -70,9 +70,9 @@ class User{
     }
     static logout = async(req, res)=>{
         try {
-            req.user.tokens = req.tokens.filter(t => t.token != req.token)
+            req.user.tokens = req.user.tokens.filter(t => t.token != req.token)
             await req.user.save()
-            res.status(200).send({apiStatus: true, message: "user logged out", data: {userData, token}})
+            res.status(200).send({apiStatus: true, message: "user logged out", data:req.user})
         } 
         catch (e) {
             res.status(500).send({apiStatus: false, message: e.message, data: e})
@@ -82,7 +82,7 @@ class User{
         try {
             req.user.tokens = []
             await req.user.save()
-            res.status(200).send({apiStatus: true, message: "user logged out from all sessions", data: {userData, token}})
+            res.status(200).send({apiStatus: true, message: "user logged out from all sessions", data: req.user})
         } 
         catch (e) {
             res.status(500).send({apiStatus: false, message: e.message, data: e})

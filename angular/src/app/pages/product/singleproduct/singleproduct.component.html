@@ -1,1 +1,17 @@
-<p>singleproduct works!</p>
+<div class="row" *ngIf="isLoaded && errMsg == ''">
+    <div class="col-4">
+        <div class="border border-3 m-3">
+            <!-- <img [src]="img?.url" class="img-fluid"> -->
+            <h6>{{product?.title}}</h6>
+            <h6>{{product?.desc}}</h6>
+            <h6>{{product?.price}}</h6>
+            <h6>{{product?.productImg}}</h6>
+        </div>
+    </div>
+</div>
+<div class="alert alert-warning" *ngIf="!isLoaded && errMsg == ''"> 
+    Loading Now ...
+</div>
+<div class="alert alert-danger" *ngIf="isLoaded && errMsg != ''">
+    {{errMsg}}
+</div>

@@ -16,7 +16,9 @@ const productSchema = mongoose.Schema({
         max: 1000,
         default: 150
     },
-    // img:{},
+    productImg:{
+        type: String
+    },
     userId:{
         type: mongoose.Schema.Types.ObjectId,
         required: true,

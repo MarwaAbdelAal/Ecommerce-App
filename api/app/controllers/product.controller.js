@@ -34,10 +34,11 @@ class Product{
     }
     static editProduct = async(req, res)=>{
         try {
-            const data = await productModel.findByIdAndUpdate(
+            await productModel.findByIdAndUpdate(
                 req.params.id,
                 req.body, 
                 {runValidator:true})
+            const data = await productModel.findById(req.params.id)
             res.status(200).send({apiStatus: true, message: "Product edited", data})
         } 
         catch (e) {
@@ -73,6 +74,20 @@ class Product{
         }
 
     }    
+    static uploadImg = async(req, res)=>{
+        try {
+            let productImg = req.file.filename
+            await productModel.findByIdAndUpdate(
+                req.params.id,
+                { productImg },
+            )
+            const data = await productModel.findById(req.params.id)
+            res.status(200).send({apiStatus: true, message: "Image uploaded", data})
+        } 
+        catch (e) {
+            res.status(500).send({apiStatus: false, message: e.message, data: e})
+        }
+    }
 }
 
 module.exports = Product

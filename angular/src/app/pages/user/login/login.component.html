@@ -1,1 +1,22 @@
-<p>login works!</p>
+<form [formGroup]="loginForm" (ngSubmit)="handleLogin()">
+    <div class="row">
+        <div class="mb-3">
+            <input class="form-control" placeholder="email" formControlName="email" required>
+            <div *ngIf="email?.['invalid'] && (email?.['dirty'] || email?.['touched'])" class="alert alert-danger">
+                <span *ngIf="email?.['errors']?.['required']">email is required</span>
+                <span *ngIf="email?.['errors']?.['email']">wrong formula of email</span>
+            </div>
+
+        </div>
+        <div class="mb-3">
+            <input class="form-control" placeholder="password" formControlName="password" required>
+            <div *ngIf="password?.['invalid'] && (password?.['dirty'] || password?.['touched'])" class="alert alert-danger">
+                <span *ngIf="password?.['errors']?.['required']">password is required</span>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <button class="btn btn-primary">Login</button>
+        </div>
+    </div>
+</form>
