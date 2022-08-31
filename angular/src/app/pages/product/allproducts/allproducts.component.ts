@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from 'src/app/providers/services/data.service';
+import { ProductService } from 'src/app/providers/services/product.service';
 
 @Component({
   selector: 'app-allproducts',
@@ -12,7 +12,7 @@ export class AllproductsComponent implements OnInit {
   isLoaded: boolean= false
   errMsg: String = ""
 
-  constructor(private _data:DataService) { }
+  constructor(private _data:ProductService) { }
 
   ngOnInit(): void {
     this.getMyData()

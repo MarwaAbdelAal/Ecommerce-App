@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DataService } from 'src/app/providers/services/data.service';
+import { ProductService } from 'src/app/providers/services/product.service';
 
 @Component({
   selector: 'app-singleproduct',
@@ -14,7 +14,7 @@ export class SingleproductComponent implements OnInit {
   isLoaded: boolean = false
   errMsg: String = ""
 
-  constructor(private _activatedRoute:ActivatedRoute, private _data:DataService) { }
+  constructor(private _activatedRoute:ActivatedRoute, private _data:ProductService) { }
 
   ngOnInit(): void {
     this.id = this._activatedRoute.snapshot.params["id"] //req.params.id

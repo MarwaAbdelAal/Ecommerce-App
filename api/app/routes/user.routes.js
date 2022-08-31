@@ -13,7 +13,7 @@ router.get("/single/:id", auth, userController.singleUser)
 router.delete("/single/:id", auth, userController.delUser)
 router.patch("/single/:id", auth, userController.editUser)
 
-router.get("/profile", auth, userController.profile)
+router.post("/profile", auth, userController.profile)
 
 router.post("/imgUpload", auth, upload.single("myImg"), userController.uploadImg)
 
