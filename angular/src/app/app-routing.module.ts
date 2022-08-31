@@ -13,6 +13,7 @@ import { SingleuserComponent } from './pages/user/singleuser/singleuser.componen
 
 const routes: Routes = [
   {path: "", component:HomeComponent},
+  // {path:"login", redirectTo:""},
   {path: "user", children:[
     {path:"", component:AllusersComponent},
     {path:"register", component:RegisterComponent},

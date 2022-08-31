@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = localStorage.getItem("g21Token")
     if(token){
       request = request.clone({ //add to the original token
-        headers: request.headers.set("Authorizaton", token)
+        headers: request.headers.set("Authorization", token)
       }) 
     }
     return next.handle(request);

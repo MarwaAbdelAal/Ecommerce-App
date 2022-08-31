@@ -1,33 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from 'src/app/providers/services/auth.service';
+import { Router } from "@angular/router";
+import { AuthService } from "src/app/providers/services/auth.service";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+    selector: "app-login",
+    templateUrl: "./login.component.html",
+    styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit {
+    errMsg: any = {};
 
-  loginForm = new FormGroup({
-    email: new FormControl("", [Validators.email, Validators.required]),
-    password: new FormControl("", [Validators.required,]),
-});
-constructor(private _auth:AuthService) { }
+    loginForm: FormGroup = new FormGroup({
+        email: new FormControl("", [Validators.email, Validators.required]),
+        password: new FormControl("", [Validators.required]),
+    });
+    constructor(private _auth: AuthService, private _router:Router) { }
 
-get email() {
-    return this.loginForm.get("email");
-}
-
-get password() {
-    return this.loginForm.get("password");
-}
-
-ngOnInit(): void { }
-handleLogin() {
-    if(this.loginForm.valid){
-        console.log(this.loginForm.value)
-        this._auth.login(this.loginForm.value)
+    get email() {
+        return this.loginForm.get("email");
     }
-}
+    get password() {
+        return this.loginForm.get("password");
+    }
+
+    ngOnInit(): void { }
+    handleLogin() {
+        let userData: any = this.loginForm.value
+        console.log(userData)
+        this._auth.login(userData).subscribe(
+            res=>{
+                console.log(res)
+                localStorage.setItem("g21Token", res.data.token)
+            },
+            e =>{
+                if(e.error.message.includes("email")) this.errMsg.email = e.error.data.errors.email.message
+                if(e.error.message.includes("password")) this.errMsg.password = e.error.data.errors.password.message
+                console.log(e.error)
+            },
+            () => {
+                this._router.navigateByUrl("user/profile")
+            }
+        )
+
+    }
 }

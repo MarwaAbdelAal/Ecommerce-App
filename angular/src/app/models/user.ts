@@ -1,10 +1,10 @@
 import { Token } from "./token"
 export interface User {
     _id?: string
-    name?: string
+    name: string
     email: string
     password: string
-    age?: number
+    age: number
     gender: string
     userImg?: string
     tokens?: Token[]

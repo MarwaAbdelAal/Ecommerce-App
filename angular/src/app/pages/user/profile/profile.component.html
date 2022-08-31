@@ -1,1 +1,20 @@
-<p>profile works!</p>
+<div class="row" *ngIf="isLoaded && errMsg == ''">
+    <!-- <div class="col-4" *ngFor="let data of profile"> -->
+        <div class="border border-3 m-3">
+            <!-- <img [src]="'staticDir'+product.productImg" class="img-fluid"> -->
+            <h3>My profile</h3>
+            <!-- <h3>{{data.name}}</h3> -->
+            <!-- <h6>{{profile.email}}</h6> -->
+            <!-- <h6>{{profile.age}}</h6> -->
+            <!-- <h6>{{profile.gender}}</h6> -->
+        </div>
+    </div>
+<!-- </div> -->
+<div class="alert alert-warning" *ngIf="!isLoaded && errMsg == ''"> 
+    Loading Now ...
+</div>
+<div class="alert alert-danger" *ngIf="isLoaded && errMsg != ''">
+    {{errMsg}}
+</div>
+
+{{profile}}
