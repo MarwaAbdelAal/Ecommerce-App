@@ -49,6 +49,7 @@ export class RegisterComponent implements OnInit {
     handleRegister() {
         // let x:User = {name: '', email: '', age: "", password: '', gender: ''}
         let userData: any =this.registerForm.value
+        
         console.log(userData)
         // this._auth.register(userData).subscribe(
             // res=>{
