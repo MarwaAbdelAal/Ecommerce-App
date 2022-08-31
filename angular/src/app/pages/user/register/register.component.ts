@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { DataService } from "src/app/providers/services/data.service";
+import { User } from "src/app/models/user";
+import { AuthService } from "src/app/providers/services/auth.service";
 
 @Component({
     selector: "app-register",
@@ -9,23 +10,23 @@ import { DataService } from "src/app/providers/services/data.service";
 })
 export class RegisterComponent implements OnInit {
 
-    // registerData:any = {}
+    errMsg = ""
 
     registerForm = new FormGroup({
-        name: new FormControl("", [
+        name: new FormControl("marwa", [
             Validators.required,
             Validators.minLength(3),
             Validators.maxLength(20),
         ]),
         email: new FormControl("", [Validators.email, Validators.required]),
-        age: new FormControl("", [Validators.required, Validators.min(20), Validators.max(65)]),
+        age: new FormControl(0, [Validators.required, Validators.min(20), Validators.max(65)]),
         password: new FormControl("", [
             Validators.required,
             // Validators.pattern("(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}")
         ]),
         gender: new FormControl("", [Validators.required]),
     });
-    constructor(private _data:DataService) { }
+    constructor(private _auth:AuthService) { }
 
     get name() {
         return this.registerForm.get("name");
@@ -44,11 +45,20 @@ export class RegisterComponent implements OnInit {
     }
 
     ngOnInit(): void { }
+    
     handleRegister() {
-        if(this.registerForm.valid){
-            console.log(this.registerForm.value)
-            // this.registerData = this.registerForm.value
-            this._data.register(this.registerForm.value)
-        }
-    }
+        // let x:User = {name: '', email: '', age: "", password: '', gender: ''}
+        let userData: any =this.registerForm.value
+        console.log(userData)
+        // this._auth.register(userData).subscribe(
+            // res=>{
+// 
+            // },
+            // e =>{
+// 
+            // },
+            // () => {}
+        // )
+
+}
 }

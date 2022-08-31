@@ -1,8 +1,8 @@
 <div class="row" *ngIf="isLoaded && errMsg == ''">
     <div class="col-4" *ngFor="let product of products" routerLink="/product/single/{{product._id}}">
         <div class="border border-3 m-3">
-            <!-- <img [src]="''+product.productImg" class="img-fluid"> -->
-            <h6>{{product.title}}</h6>
+            <!-- <img [src]="'staticDir'+product.productImg" class="img-fluid"> -->
+            <h3>{{product.title}}</h3>
             <h6>{{product.desc}}</h6>
             <h6>{{product.price}}</h6>
             <h6>{{product.productImg}}</h6>

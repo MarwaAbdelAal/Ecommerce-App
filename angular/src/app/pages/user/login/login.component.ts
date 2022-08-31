@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { DataService } from 'src/app/providers/services/data.service';
+import { AuthService } from 'src/app/providers/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
     email: new FormControl("", [Validators.email, Validators.required]),
     password: new FormControl("", [Validators.required,]),
 });
-constructor(private _data:DataService) { }
+constructor(private _auth:AuthService) { }
 
 get email() {
     return this.loginForm.get("email");
@@ -27,8 +27,7 @@ ngOnInit(): void { }
 handleLogin() {
     if(this.loginForm.valid){
         console.log(this.loginForm.value)
-        // this.registerData = this.loginForm.value
-        this._data.login(this.loginForm.value)
+        this._auth.login(this.loginForm.value)
     }
 }
 }
