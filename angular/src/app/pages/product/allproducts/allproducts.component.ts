@@ -11,6 +11,7 @@ export class AllproductsComponent implements OnInit {
   products: any[] = []
   isLoaded: boolean= false
   errMsg: String = ""
+  baseUrl = "http://localhost:3000/"
 
   constructor(private _data:ProductService) { }
 

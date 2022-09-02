@@ -9,10 +9,10 @@ import { AuthService } from 'src/app/providers/services/auth.service';
 export class ProfileComponent implements OnInit {
 
   profile: any = []
-  isLoaded: boolean= true
+  isLoaded: boolean= false
   errMsg: String = ""
 
-  constructor(private _auth:AuthService) { }
+  constructor(public _auth:AuthService) { }
 
   ngOnInit(): void {
     this.getMyData()
@@ -22,16 +22,14 @@ export class ProfileComponent implements OnInit {
     this._auth.profile().subscribe(
       data=>{
         console.log(data.data)
-        console.log("PROFILE")
-        this.profile = JSON.stringify(data.data)
-        console.log(this.profile)
+        this.profile = data.data
       },
       e=>{
         this.errMsg=e.message
-        // this.isLoaded=true
+        this.isLoaded=true
       },
       ()=>{
-        // this.isLoaded=true //finish
+        this.isLoaded=true //finish
       }
     )
   }

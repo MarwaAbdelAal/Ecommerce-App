@@ -21,7 +21,7 @@
         </div>
 
         <div class="mb-3">
-            <input class="form-control" placeholder="password" formControlName="password" >
+            <input class="form-control" placeholder="password" formControlName="password" type="password">
             <div *ngIf="password?.['invalid'] && (password?.['dirty'] || password?.['touched'])" class="alert alert-danger">
                 <span *ngIf="password?.['errors']?.['required']">password is required</span>
                 <!-- <span *ngIf="password?.['errors']?.['pattern']">Weak password "at least one number, one uppercase, lowercase letter, one Special Symbol and at least 8 or more characters"</span> -->
@@ -42,11 +42,11 @@
 
         <div class="mb-3">
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" value="male" formControlName="gender" required>
+                <input class="form-check-input" type="radio" name="gender" value="male" formControlName="gender">
                 Male
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" value="female" formControlName="gender" required>
+                <input class="form-check-input" type="radio" name="gender" value="female" formControlName="gender">
                 Female
             </div>
             <div *ngIf="gender?.['invalid'] && (gender?.['dirty'] || gender?.['touched'])" class="alert alert-danger">

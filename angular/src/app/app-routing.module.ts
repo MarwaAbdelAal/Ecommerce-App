@@ -6,7 +6,9 @@ import { AllproductsComponent } from './pages/product/allproducts/allproducts.co
 import { MyproductsComponent } from './pages/product/myproducts/myproducts.component';
 import { SingleproductComponent } from './pages/product/singleproduct/singleproduct.component';
 import { AllusersComponent } from './pages/user/allusers/allusers.component';
+import { EdituserComponent } from './pages/user/edituser/edituser.component';
 import { LoginComponent } from './pages/user/login/login.component';
+import { LogoutComponent } from './pages/user/logout/logout.component';
 import { ProfileComponent } from './pages/user/profile/profile.component';
 import { RegisterComponent } from './pages/user/register/register.component';
 import { SingleuserComponent } from './pages/user/singleuser/singleuser.component';
@@ -19,8 +21,9 @@ const routes: Routes = [
     {path:"register", component:RegisterComponent},
     {path:"login", component:LoginComponent},
     {path:"profile", component:ProfileComponent},
+    {path:"logout", component: LogoutComponent},
     {path:"single", children:[
-      {path:":id", component:SingleuserComponent},
+      {path:":id", component:EdituserComponent},
     ]}
   ]},
   {path: "product", children:[

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <div class="container-fluid">
-    <a class="navbar-brand" routerLink="/">Navbar</a>
+    <a class="navbar-brand" routerLink="/"><img src="assets/e-commerce.png" alt="navbar-icon" class="img-fluid"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
@@ -13,16 +13,27 @@
         <a class="nav-link" routerLink="/product" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Products</a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" routerLink="/user/login" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Login</a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" routerLink="/user/register" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Register</a>
+            <a class="nav-link" routerLink="/product/add" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Add Product</a>
+            </li>
+        <li class="nav-item" *ngIf="_auth.isLoggedin">
+            <a class="nav-link" routerLink="/user/profile" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Profile</a>
         </li>
     </ul>
-    <form class="d-flex">
+    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item" *ngIf="!_auth.isLoggedin">
+        <a class="nav-link" routerLink="/user/login" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Login</a>
+        </li>
+        <li class="nav-item" *ngIf="!_auth.isLoggedin">
+        <a class="nav-link" routerLink="/user/register" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Register</a>
+        </li>
+        <li class="nav-item" *ngIf="_auth.isLoggedin">
+            <a class="nav-link" routerLink="/user/logout" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Log Out</a>
+        </li>
+    </ul>
+    <!-- <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
+    </form> -->
     </div>
 </div>
 </nav>

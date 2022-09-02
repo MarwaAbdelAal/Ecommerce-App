@@ -1,20 +1,26 @@
-<div class="row" *ngIf="isLoaded && errMsg == ''">
-    <!-- <div class="col-4" *ngFor="let data of profile"> -->
-        <div class="border border-3 m-3">
-            <!-- <img [src]="'staticDir'+product.productImg" class="img-fluid"> -->
-            <h3>My profile</h3>
-            <!-- <h3>{{data.name}}</h3> -->
-            <!-- <h6>{{profile.email}}</h6> -->
-            <!-- <h6>{{profile.age}}</h6> -->
-            <!-- <h6>{{profile.gender}}</h6> -->
+<div class="card mb-3" style="max-width: 540px;" *ngIf="isLoaded && errMsg == ''">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="assets/profile.png" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{profile.name}}</h5>
+          <p class="card-text">Email: {{profile.email}}</p>
+          <p class="card-text">Age: {{profile.age}}</p>
+          <p class="card-text"><small class="text-muted">Gender: {{profile.gender}}</small></p>
         </div>
+        <div class="card-body">
+            <button routerLink="/user/single/{{profile._id}}" class="card-link btn btn-warning">Edit</button>
+            <button routerLink="/user/single/{{profile._id}}" class="card-link btn btn-danger">Delete</button>
+          </div>
+      </div>
     </div>
-<!-- </div> -->
+</div>
+
 <div class="alert alert-warning" *ngIf="!isLoaded && errMsg == ''"> 
     Loading Now ...
 </div>
 <div class="alert alert-danger" *ngIf="isLoaded && errMsg != ''">
     {{errMsg}}
 </div>
-
-{{profile}}

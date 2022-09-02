@@ -9,6 +9,9 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   baseUrl = "http://localhost:3000/user/"
+  public userData = null
+  public isLoggedin = false
+  public isEdit = false
 
   constructor(private _http:HttpClient) { }
 
@@ -21,11 +24,11 @@ export class AuthService {
   getAllUsers():Observable<any>{
     return this._http.get(`${this.baseUrl}`)
   }
-  logout(data: any):Observable<any>{
-    return this._http.post(`${this.baseUrl}logout`, data)
+  logout():Observable<any>{
+    return this._http.post(`${this.baseUrl}logout`, null)
   }
-  logoutAll(data: any):Observable<any>{
-    return this._http.post(`${this.baseUrl}logoutAll`, data)
+  logoutAll():Observable<any>{
+    return this._http.post(`${this.baseUrl}logoutAll`, null)
   }
   singleUser(id: string):Observable<any>{
     return this._http.get(`${this.baseUrl}single/${id}`)

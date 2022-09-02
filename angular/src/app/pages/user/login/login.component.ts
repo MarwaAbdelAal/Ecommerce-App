@@ -9,6 +9,7 @@ import { AuthService } from "src/app/providers/services/auth.service";
     styleUrls: ["./login.component.css"],
 })
 export class LoginComponent implements OnInit {
+    
     errMsg: any = {};
 
     loginForm: FormGroup = new FormGroup({
@@ -24,7 +25,10 @@ export class LoginComponent implements OnInit {
         return this.loginForm.get("password");
     }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+        if(this._auth.isLoggedin) this._router.navigateByUrl("/profile")
+    }
+
     handleLogin() {
         let userData: any = this.loginForm.value
         console.log(userData)
@@ -32,6 +36,8 @@ export class LoginComponent implements OnInit {
             res=>{
                 console.log(res)
                 localStorage.setItem("g21Token", res.data.token)
+                this._auth.isLoggedin = true
+                this._auth.userData = res.data.userData
             },
             e =>{
                 if(e.error.message.includes("email")) this.errMsg.email = e.error.data.errors.email.message
