@@ -11,7 +11,6 @@ import { AuthService } from "src/app/providers/services/auth.service";
 })
 export class EdituserComponent implements OnInit {
     
-    id: any
     errMsg: any = {};
     profile: any = []
 
@@ -53,24 +52,9 @@ export class EdituserComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.getMyData()
         if(this._auth.userData) this.editForm.patchValue(this._auth.userData)
         else this._router.navigateByUrl("user/login")
     }
-
-    getMyData(){
-        this._auth.profile().subscribe(
-          data=>{
-            console.log(data.data)
-            this.profile = data.data
-          },
-          e=>{
-            this.errMsg=e.message
-          },
-          ()=>{
-          }
-        )
-      }
     
     handleEdit(){
         if(this._auth.userData){

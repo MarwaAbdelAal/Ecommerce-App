@@ -19,14 +19,15 @@ export class LogoutComponent implements OnInit {
   userLogout(){
     this._auth.logout().subscribe(
       res=>{
+        localStorage.removeItem('g21Token');
         this._auth.isLoggedin = false
         this._auth.userData = null
       },
       err=>{
-        this._router.navigateByUrl("/")
+        console.log(err.error)
       },
       ()=>{
-        this._auth.isLoggedin = false
+        this._router.navigateByUrl("/")
       }
     )
 

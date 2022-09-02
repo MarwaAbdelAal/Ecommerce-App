@@ -11,7 +11,6 @@ export class AuthService {
   baseUrl = "http://localhost:3000/user/"
   public userData = null
   public isLoggedin = false
-  public isEdit = false
 
   constructor(private _http:HttpClient) { }
 

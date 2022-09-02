@@ -12,11 +12,8 @@
         <li class="nav-item">
         <a class="nav-link" routerLink="/product" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Products</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" routerLink="/product/add" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Add Product</a>
-            </li>
         <li class="nav-item" *ngIf="_auth.isLoggedin">
-            <a class="nav-link" routerLink="/user/profile" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Profile</a>
+            <a class="nav-link" routerLink="/product/add" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Add Product</a>
         </li>
     </ul>
     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -25,6 +22,12 @@
         </li>
         <li class="nav-item" *ngIf="!_auth.isLoggedin">
         <a class="nav-link" routerLink="/user/register" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Register</a>
+        </li>
+        <li class="nav-item" *ngIf="_auth.isLoggedin">
+            <a class="nav-link" routerLink="/product/myproducts" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">My Products</a>
+        </li>
+        <li class="nav-item" *ngIf="_auth.isLoggedin">
+            <a class="nav-link" routerLink="/user/profile" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Profile</a>
         </li>
         <li class="nav-item" *ngIf="_auth.isLoggedin">
             <a class="nav-link" routerLink="/user/logout" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Log Out</a>

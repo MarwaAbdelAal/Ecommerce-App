@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from 'src/app/providers/services/product.service';
 
 @Component({
   selector: 'app-myproducts',
@@ -7,9 +8,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyproductsComponent implements OnInit {
 
-  constructor() { }
+  products: any[] = []
+  isLoaded: boolean= false
+  errMsg: String = ""
+
+  baseUrl = "http://localhost:3000/"
+
+  constructor(private _data:ProductService) { }
 
   ngOnInit(): void {
+    this.getMyData()
   }
+
+  getMyData(){
+    this._data.myProducts().subscribe(
+      data=>{
+        console.log(data.data)
+        this.products = data.data
+      },
+      e=>{
+        this.errMsg=e.message
+        this.isLoaded=true
+      },
+      ()=>{
+        this.isLoaded=true //finish
+      }
+    )
+  }
+
 
 }

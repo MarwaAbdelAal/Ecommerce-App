@@ -8,12 +8,14 @@ const productSchema = mongoose.Schema({
     },
     desc:{
         type: String,
+        required: true,
         trim: true,
     },
     price:{
         type: Number,
-        min: 100,
-        max: 1000,
+        required: true,
+        // min: 100,
+        // max: 1000,
         default: 150
     },
     productImg:{

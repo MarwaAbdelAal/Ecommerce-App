@@ -1,11 +1,19 @@
-<div class="row" *ngIf="isLoaded && errMsg == ''">
-    <div class="col-4">
-        <div class="border border-3 m-3">
-            <!-- <img [src]="img?.url" class="img-fluid"> -->
-            <h3>{{product?.title}}</h3>
-            <h6>{{product?.desc}}</h6>
-            <h6>{{product?.price}}</h6>
-            <h6>{{product?.productImg}}</h6>
+<div class="row d-flex justify-content-center text-center" *ngIf="isLoaded && errMsg == ''">
+    <div class="col-8">
+        <div class="border border-1 m-3 card">
+            <!-- <img [src]="baseUrl+product.productImg" class="img-fluid card-img-top" routerLink="/product/single/{{product._id}}"> -->
+            <img src="http://localhost:3000/1661920307775.jpg" class="img-fluid card-img-top" routerLink="/product/single/{{product._id}}">
+            <div class="card-body">
+                <h5 class="card-title">{{product?.title}}</h5>
+                <p class="card-text">{{product?.desc}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Price: {{product?.price}}</li>
+            </ul>
+              <div class="card-body">
+                <button routerLink="/product/single/{{product?._id}}" class="card-link btn btn-success">Edit</button>
+                <button routerLink="/product/single/{{product?._id}}" class="card-link btn btn-danger">Delete</button>
+              </div>
         </div>
     </div>
 </div>
