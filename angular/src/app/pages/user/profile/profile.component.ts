@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/providers/services/auth.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class ProfileComponent implements OnInit {
   isLoaded: boolean= false
   errMsg: String = ""
 
-  constructor(public _auth:AuthService) { }
+  constructor(public _auth:AuthService, private _router:Router) { }
 
   ngOnInit(): void {
     this.getMyData()
@@ -21,15 +22,17 @@ export class ProfileComponent implements OnInit {
   getMyData(){
     this._auth.profile().subscribe(
       data=>{
+        // console.log(data)
         console.log(data.data)
         this.profile = data.data
       },
       e=>{
-        this.errMsg=e.message
-        this.isLoaded=true
+        this.errMsg = e.message
+        this.isLoaded = true
+        this._router.navigateByUrl("/")
       },
       ()=>{
-        this.isLoaded=true //finish
+        this.isLoaded = true //finish
       }
     )
   }

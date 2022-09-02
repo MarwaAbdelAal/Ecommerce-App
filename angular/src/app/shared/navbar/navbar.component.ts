@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
   constructor(public _auth:AuthService, private _router:Router) { }
 
   ngOnInit(): void {
-    this.profile()
+    if (localStorage.getItem('g21Token')) this.profile()
   }
 
   profile(){
