@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/providers/services/auth.service';
 })
 export class ProfileComponent implements OnInit {
 
+  imgUrl: string = "http://localhost:3000/"
   profile: any = []
   isLoaded: boolean= false
   errMsg: String = ""
@@ -22,7 +23,6 @@ export class ProfileComponent implements OnInit {
   getMyData(){
     this._auth.profile().subscribe(
       data=>{
-        // console.log(data)
         // console.log(data.data)
         this.profile = data.data
       },

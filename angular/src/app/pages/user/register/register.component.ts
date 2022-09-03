@@ -49,10 +49,9 @@ export class RegisterComponent implements OnInit {
     
     handleRegister() {
         let userData: User = this.registerForm.value
-        console.log(userData)
         this._auth.register(userData).subscribe(
             res=>{
-                console.log(res)
+                // console.log(res)
             },
             e =>{
                 if(e.error.message.includes("name")) this.errMsg.name = e.error.data.errors.name.message

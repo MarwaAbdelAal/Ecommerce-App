@@ -24,6 +24,9 @@
             <div class="alert alert-danger" *ngIf="errMsg.price">{{errMsg.price}}</div>
         </div>
         <div class="mb-3">
+            <input type="file" class="form-control" name="productImg" (change)="onChangeImg($event)">
+        </div>
+        <div class="mb-3">
             <button class="btn btn-success">Edit</button>
         </div>
     </div>

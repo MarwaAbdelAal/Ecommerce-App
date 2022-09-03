@@ -2,7 +2,6 @@
     <div class="row">
         <div class="mb-3">
             <input class="form-control" placeholder="name" formControlName="name" >
-            <!-- <p>{{registerForm.controls?.['name']?.['errors']|json}}</p> -->
             <div *ngIf="name?.['invalid'] && (name?.['dirty'] || name?.['touched'])" class="alert alert-danger">
                 <span *ngIf="name?.['errors']?.['required']">Name is required</span>
                 <span *ngIf="name?.['errors']?.['minlength']">Name must be more than 3 characters</span>

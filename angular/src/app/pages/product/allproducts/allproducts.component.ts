@@ -11,9 +11,9 @@ export class AllproductsComponent implements OnInit {
   products: any[] = []
   isLoaded: boolean= false
   errMsg: String = ""
-  baseUrl = "http://localhost:3000/"
+  imgUrl = "http://localhost:3000/"
 
-  constructor(private _data:ProductService) { }
+  constructor(public _data:ProductService) { }
 
   ngOnInit(): void {
     this.getMyData()

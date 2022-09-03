@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/providers/services/auth.service';
 import { ProductService } from 'src/app/providers/services/product.service';
 
 @Component({
@@ -13,8 +14,9 @@ export class SingleproductComponent implements OnInit {
   product: any
   isLoaded: boolean = false
   errMsg: String = ""
+  imgUrl: string = "http://localhost:3000/"
 
-  constructor(private _activatedRoute:ActivatedRoute, private _data:ProductService) { }
+  constructor(private _activatedRoute:ActivatedRoute, private _data:ProductService, public _auth:AuthService) { }
 
   ngOnInit(): void {
     this.id = this._activatedRoute.snapshot.params["id"] //req.params.id

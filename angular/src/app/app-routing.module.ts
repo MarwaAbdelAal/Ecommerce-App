@@ -15,6 +15,7 @@ import { LogoutComponent } from './pages/user/logout/logout.component';
 import { ProfileComponent } from './pages/user/profile/profile.component';
 import { RegisterComponent } from './pages/user/register/register.component';
 import { SingleuserComponent } from './pages/user/singleuser/singleuser.component';
+import { IsloginGuard } from './providers/guards/islogin.guard';
 
 const routes: Routes = [
   {path: "", component:HomeComponent},
@@ -23,22 +24,22 @@ const routes: Routes = [
     {path:"", component:AllusersComponent},
     {path:"register", component:RegisterComponent},
     {path:"login", component:LoginComponent},
-    {path:"profile", component:ProfileComponent},
+    {path:"profile", component:ProfileComponent, canActivate: [IsloginGuard]},
     {path:"logout", component: LogoutComponent},
     {path:"single", children:[
       {path:"view/:id", component:SingleuserComponent},
-      {path:"edit/:id", component:EdituserComponent},
-      {path:"delete/:id", component:DeleteuserComponent},
+      {path:"edit/:id", component:EdituserComponent, canActivate: [IsloginGuard]},
+      {path:"delete/:id", component:DeleteuserComponent, canActivate: [IsloginGuard]},
     ]}
   ]},
   {path: "product", children:[
     {path:"", component:AllproductsComponent},
-    {path:"add", component:AddproductComponent},
-    {path:"myproducts", component:MyproductsComponent},
+    {path:"add", component:AddproductComponent, canActivate: [IsloginGuard]},
+    {path:"myproducts", component:MyproductsComponent, canActivate: [IsloginGuard]},
     {path:"single", children:[
       {path:"view/:id", component:SingleproductComponent},
-      {path:"edit/:id", component:EditproductComponent},
-      {path:"delete/:id", component:DeleteproductComponent},
+      {path:"edit/:id", component:EditproductComponent, canActivate: [IsloginGuard]},
+      {path:"delete/:id", component:DeleteproductComponent, canActivate: [IsloginGuard]},
     ]}
   ]},
 

@@ -31,18 +31,16 @@ export class LoginComponent implements OnInit {
 
     handleLogin() {
         let userData: any = this.loginForm.value
-        // console.log(userData)
         this._auth.login(userData).subscribe(
             res=>{
-                console.log(res)
                 localStorage.setItem("g21Token", res.data.token)
                 this._auth.isLoggedin = true
                 this._auth.userData = res.data.userData
             },
             e =>{
-                if(e.error.message.includes("email")) this.errMsg.email = e.error.data.errors.email.message
-                if(e.error.message.includes("password")) this.errMsg.password = e.error.data.errors.password.message
                 console.log(e.error)
+                if(e.error.message.includes("email")) this.errMsg.email = e.error.message
+                if(e.error.message.includes("password")) this.errMsg.password = e.error.message
             },
             () => {
                 this._router.navigateByUrl("user/profile")

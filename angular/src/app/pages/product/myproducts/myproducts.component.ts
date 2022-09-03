@@ -12,8 +12,7 @@ export class MyproductsComponent implements OnInit {
   isLoaded: boolean = false
   errMsg: String = ""
   isEmpty: boolean = false
-
-  baseUrl = "http://localhost:3000/"
+  imgUrl = "http://localhost:3000/"
 
   constructor(private _data:ProductService) { }
 
@@ -24,7 +23,7 @@ export class MyproductsComponent implements OnInit {
   getMyData(){
     this._data.myProducts().subscribe(
       data=>{
-        console.log(data.data)
+        // console.log(data.data)
         this.products = data.data
         
         if (this.products.length == 0) this.isEmpty = true

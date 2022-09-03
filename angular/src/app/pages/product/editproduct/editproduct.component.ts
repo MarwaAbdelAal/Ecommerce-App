@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/providers/services/auth.service';
 import { ProductService } from 'src/app/providers/services/product.service';
 
 @Component({
@@ -13,6 +14,8 @@ export class EditproductComponent implements OnInit {
   errMsg: any = {};
   product: any = {}
   id: any
+  file:any
+  myData:FormData = new FormData()
 
 // baseUrl = "http://localhost:3000/"
 
@@ -22,7 +25,7 @@ export class EditproductComponent implements OnInit {
     price: new FormControl("", [Validators.required]),
   });
 
-  constructor(private _data:ProductService, private _router:Router, private _activatedRoute:ActivatedRoute) { }
+  constructor(private _data:ProductService, private _router:Router, private _activatedRoute:ActivatedRoute, private _auth:AuthService) { }
 
   get title() {
   return this.editForm.get("title");
@@ -43,7 +46,8 @@ export class EditproductComponent implements OnInit {
         this._data.editProduct(this.product?.["_id"], this.editForm.value)
         .subscribe(
           (res) => {
-              console.log(res);
+              if(this.file) this.submitImage()
+              // console.log(res);
           },
           (e) => {
               if (e.error.message.includes("title")) this.errMsg.title = e.error.data.errors.title.message;
@@ -52,7 +56,7 @@ export class EditproductComponent implements OnInit {
               console.log(e.error);
           },
           () => {
-              this._router.navigateByUrl("product")
+              this._router.navigateByUrl(`product/single/view/${this.id}`)
           }
           )
       }
@@ -61,7 +65,6 @@ export class EditproductComponent implements OnInit {
   getSingle(){
     this._data.getSingleProduct(this.id).subscribe(
       result => {
-        // console.log(result.data)
         this.product = result.data
         this.editForm.patchValue(result.data)
       },
@@ -70,6 +73,18 @@ export class EditproductComponent implements OnInit {
       },
       () => { // finish
       }
+    )
+  }
+
+  onChangeImg(event:any){
+    this.file = event.target.files[0]
+  }
+  
+  submitImage(){
+    this.myData.append("productImg", this.file, this.file.name)
+    this._data.imgUpload(this.id, this.myData).subscribe(
+      res => console.log(res),
+      e => console.log(e)
     )
   }
 

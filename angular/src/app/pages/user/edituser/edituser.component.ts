@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { User } from "src/app/models/user";
 import { AuthService } from "src/app/providers/services/auth.service";
 
 @Component({
@@ -13,6 +12,8 @@ export class EdituserComponent implements OnInit {
     
     errMsg: any = {};
     profile: any = []
+    file:any
+    myData:FormData = new FormData()
 
     editForm: FormGroup = new FormGroup({
         name: new FormControl("", [
@@ -48,12 +49,17 @@ export class EdituserComponent implements OnInit {
         if(this._auth.userData) this.editForm.patchValue(this._auth.userData)
         else this._router.navigateByUrl("user/login")
     }
+
+    onChangeImg(event:any){
+        this.file = event.target.files[0]
+    }
     
     handleEdit(){
         if(this._auth.userData){
           this._auth.editUser(this._auth.userData?.["_id"], this.editForm.value)
           .subscribe(
             (res) => {
+                if(this.file) this.submitImage()
                 console.log(res);
             },
             (e) => {
@@ -68,5 +74,13 @@ export class EdituserComponent implements OnInit {
             }
             )
         }
+    }
+
+    submitImage(){
+      this.myData.append("myImg", this.file, this.file.name)
+      this._auth.imgUpload(this.myData).subscribe(
+        res => console.log(res),
+        e => console.log(e)
+      )
     }
 }

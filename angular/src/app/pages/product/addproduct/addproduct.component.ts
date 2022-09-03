@@ -48,7 +48,7 @@ handleProduct() {
             console.log(e.error)
         },
         () => {
-            this._router.navigateByUrl("product")
+            this._router.navigateByUrl("product/myproducts")
         }
     )
 }

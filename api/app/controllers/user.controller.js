@@ -17,7 +17,7 @@ class User{
             res.status(200).send({apiStatus: true, message: "user registered", data: userData})
         } 
         catch (e) {
-            res.status(500).send({apiStatus: false, message: e.message, data: e})
+            res.status(400).send({apiStatus: false, message: e.message, data: e})
         }
     }
     static singleUser = async(req, res)=>{
@@ -57,7 +57,7 @@ class User{
             res.status(200).send({apiStatus: true, message: "user logged in", data: {userData, token}})
         } 
         catch (e) {
-            res.status(500).send({apiStatus: false, message: e.message, data: e})
+            res.status(400).send({apiStatus: false, message: e.message, data: e})
         }
     }
     static profile = async(req, res)=>{
