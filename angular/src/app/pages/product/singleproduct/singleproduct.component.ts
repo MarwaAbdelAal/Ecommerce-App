@@ -24,7 +24,7 @@ export class SingleproductComponent implements OnInit {
   getSingle(id:any){
     this._data.getSingleProduct(id).subscribe(
       result => {
-        console.log(result.data)
+        // console.log(result.data)
         this.product = result.data
       },
       e => {

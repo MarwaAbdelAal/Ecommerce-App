@@ -40,7 +40,6 @@ handleProduct() {
     this._data.addProduct(productData).subscribe(
         res=>{
             console.log(res)
-            this._data.productData = res.data
         },
         e =>{
             if(e.error.message.includes("title")) this.errMsg.title = e.error.data.errors.title.message

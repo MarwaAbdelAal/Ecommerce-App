@@ -11,6 +11,8 @@ import { ProductService } from 'src/app/providers/services/product.service';
 export class EditproductComponent implements OnInit {
 
   errMsg: any = {};
+  product: any = {}
+  id: any
 
 // baseUrl = "http://localhost:3000/"
 
@@ -32,14 +34,13 @@ export class EditproductComponent implements OnInit {
   return this.editForm.get("price");
   }
   ngOnInit(): void {
-    //////////////////////// THERE IS A BUG HERE /////////////////////////////
-      if(this._data.productData) this.editForm.patchValue(this._data.productData)
-      else this._router.navigateByUrl("product/add")
+    this.id = this._activatedRoute.snapshot.params["id"] //req.params.id
+    this.getSingle()
   }
 
   handleEdit(){
-      if(this._data.productData){
-        this._data.editProduct(this._data.productData?.["_id"], this.editForm.value)
+      if(this.product){
+        this._data.editProduct(this.product?.["_id"], this.editForm.value)
         .subscribe(
           (res) => {
               console.log(res);
@@ -55,6 +56,21 @@ export class EditproductComponent implements OnInit {
           }
           )
       }
+  }
+
+  getSingle(){
+    this._data.getSingleProduct(this.id).subscribe(
+      result => {
+        // console.log(result.data)
+        this.product = result.data
+        this.editForm.patchValue(result.data)
+      },
+      e => {
+        this.errMsg = e.message
+      },
+      () => { // finish
+      }
+    )
   }
 
 }

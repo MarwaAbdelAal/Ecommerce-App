@@ -9,7 +9,6 @@ import { Product } from 'src/app/models/product';
 export class ProductService {
 
   baseUrl = "http://localhost:3000/product/"
-  public productData = null
 
   constructor(private _http:HttpClient) { }
 

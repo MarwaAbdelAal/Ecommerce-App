@@ -22,7 +22,7 @@ export class AllproductsComponent implements OnInit {
   getMyData(){
     this._data.getAllProducts().subscribe(
       data=>{
-        console.log(data.data)
+        // console.log(data.data)
         this.products = data.data
       },
       e=>{

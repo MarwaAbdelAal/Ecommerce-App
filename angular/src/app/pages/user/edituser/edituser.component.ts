@@ -26,10 +26,6 @@ export class EdituserComponent implements OnInit {
             Validators.min(20),
             Validators.max(65),
         ]),
-        password: new FormControl("", [
-            Validators.required,
-            // Validators.pattern("(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}")
-        ]),
         gender: new FormControl("", [Validators.required]),
     });
 
@@ -43,9 +39,6 @@ export class EdituserComponent implements OnInit {
     }
     get age() {
         return this.editForm.get("age");
-    }
-    get password() {
-        return this.editForm.get("password");
     }
     get gender() {
         return this.editForm.get("gender");
@@ -66,7 +59,6 @@ export class EdituserComponent implements OnInit {
             (e) => {
                 if (e.error.message.includes("name")) this.errMsg.name = e.error.data.errors.name.message;
                 if (e.error.message.includes("email")) this.errMsg.email = e.error.data.errors.email.message;
-                if (e.error.message.includes("password")) this.errMsg.password = e.error.data.errors.password.message;
                 if (e.error.message.includes("age")) this.errMsg.age = e.error.data.errors.age.message;
                 if (e.error.message.includes("gender")) this.errMsg.gender = e.error.data.errors.gender.message;
                 console.log(e.error);
