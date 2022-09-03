@@ -22,6 +22,8 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { AuthInterceptor } from './providers/interceptors/auth.interceptor';
 import { LogoutComponent } from './pages/user/logout/logout.component';
+import { DeleteproductComponent } from './pages/product/deleteproduct/deleteproduct.component';
+import { DeleteuserComponent } from './pages/user/deleteuser/deleteuser.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { LogoutComponent } from './pages/user/logout/logout.component';
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    LogoutComponent
+    LogoutComponent,
+    DeleteproductComponent,
+    DeleteuserComponent
   ],
   imports: [
     BrowserModule,

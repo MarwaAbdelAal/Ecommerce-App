@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
     handleLogin() {
         let userData: any = this.loginForm.value
-        console.log(userData)
+        // console.log(userData)
         this._auth.login(userData).subscribe(
             res=>{
                 console.log(res)

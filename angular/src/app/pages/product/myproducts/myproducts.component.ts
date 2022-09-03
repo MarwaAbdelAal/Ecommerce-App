@@ -9,8 +9,9 @@ import { ProductService } from 'src/app/providers/services/product.service';
 export class MyproductsComponent implements OnInit {
 
   products: any[] = []
-  isLoaded: boolean= false
+  isLoaded: boolean = false
   errMsg: String = ""
+  isEmpty: boolean = false
 
   baseUrl = "http://localhost:3000/"
 
@@ -25,13 +26,16 @@ export class MyproductsComponent implements OnInit {
       data=>{
         console.log(data.data)
         this.products = data.data
+        
+        if (this.products.length == 0) this.isEmpty = true
+        else this.isEmpty = false
       },
       e=>{
-        this.errMsg=e.message
-        this.isLoaded=true
+        this.errMsg = e.message
+        this.isLoaded = true
       },
       ()=>{
-        this.isLoaded=true //finish
+        this.isLoaded = true //finish
       }
     )
   }

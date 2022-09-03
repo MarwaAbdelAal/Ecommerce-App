@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
     this._auth.profile().subscribe(
       data=>{
         // console.log(data)
-        console.log(data.data)
+        // console.log(data.data)
         this.profile = data.data
       },
       e=>{

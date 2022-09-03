@@ -3,10 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AddproductComponent } from './pages/product/addproduct/addproduct.component';
 import { AllproductsComponent } from './pages/product/allproducts/allproducts.component';
+import { DeleteproductComponent } from './pages/product/deleteproduct/deleteproduct.component';
 import { EditproductComponent } from './pages/product/editproduct/editproduct.component';
 import { MyproductsComponent } from './pages/product/myproducts/myproducts.component';
 import { SingleproductComponent } from './pages/product/singleproduct/singleproduct.component';
 import { AllusersComponent } from './pages/user/allusers/allusers.component';
+import { DeleteuserComponent } from './pages/user/deleteuser/deleteuser.component';
 import { EdituserComponent } from './pages/user/edituser/edituser.component';
 import { LoginComponent } from './pages/user/login/login.component';
 import { LogoutComponent } from './pages/user/logout/logout.component';
@@ -24,7 +26,9 @@ const routes: Routes = [
     {path:"profile", component:ProfileComponent},
     {path:"logout", component: LogoutComponent},
     {path:"single", children:[
-      {path:":id", component:EdituserComponent},
+      {path:"view/:id", component:SingleuserComponent},
+      {path:"edit/:id", component:EdituserComponent},
+      {path:"delete/:id", component:DeleteuserComponent},
     ]}
   ]},
   {path: "product", children:[
@@ -32,8 +36,9 @@ const routes: Routes = [
     {path:"add", component:AddproductComponent},
     {path:"myproducts", component:MyproductsComponent},
     {path:"single", children:[
-      // {path:":id", component:SingleproductComponent},
-      {path:":id", component:EditproductComponent},
+      {path:"view/:id", component:SingleproductComponent},
+      {path:"edit/:id", component:EditproductComponent},
+      {path:"delete/:id", component:DeleteproductComponent},
     ]}
   ]},
 
