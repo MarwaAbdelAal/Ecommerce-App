@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { AddcategoryComponent } from './pages/category/addcategory/addcategory.component';
+import { AllcategoriesComponent } from './pages/category/allcategories/allcategories.component';
+import { DelcategoryComponent } from './pages/category/delcategory/delcategory.component';
+import { EditcategoryComponent } from './pages/category/editcategory/editcategory.component';
+import { ProductsComponent } from './pages/category/products/products.component';
 import { AddproductComponent } from './pages/product/addproduct/addproduct.component';
 import { AllproductsComponent } from './pages/product/allproducts/allproducts.component';
 import { DeleteproductComponent } from './pages/product/deleteproduct/deleteproduct.component';
@@ -42,7 +47,15 @@ const routes: Routes = [
       {path:"delete/:id", component:DeleteproductComponent, canActivate: [IsloginGuard]},
     ]}
   ]},
-
+  {path: "category", children:[
+    {path:"", component:AllcategoriesComponent},
+    {path:"products/:id", component:ProductsComponent},
+    {path:"add", component:AddcategoryComponent, canActivate: [IsloginGuard]},
+    {path:"single", children:[
+      {path:"edit/:id", component:EditcategoryComponent, canActivate: [IsloginGuard]},
+      {path:"delete/:id", component:DelcategoryComponent, canActivate: [IsloginGuard]},
+    ]}
+  ]}
 ];
 
 @NgModule({

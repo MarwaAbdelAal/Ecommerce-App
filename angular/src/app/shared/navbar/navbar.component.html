@@ -12,6 +12,9 @@
         <li class="nav-item">
         <a class="nav-link" routerLink="/product" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Products</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/category" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Categories</a>
+        </li>
         <li class="nav-item" *ngIf="_auth.isLoggedin">
             <a class="nav-link" routerLink="/product/add" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Add Product</a>
         </li>

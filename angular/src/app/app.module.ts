@@ -24,6 +24,11 @@ import { AuthInterceptor } from './providers/interceptors/auth.interceptor';
 import { LogoutComponent } from './pages/user/logout/logout.component';
 import { DeleteproductComponent } from './pages/product/deleteproduct/deleteproduct.component';
 import { DeleteuserComponent } from './pages/user/deleteuser/deleteuser.component';
+import { AddcategoryComponent } from './pages/category/addcategory/addcategory.component';
+import { AllcategoriesComponent } from './pages/category/allcategories/allcategories.component';
+import { DelcategoryComponent } from './pages/category/delcategory/delcategory.component';
+import { ProductsComponent } from './pages/category/products/products.component';
+import { EditcategoryComponent } from './pages/category/editcategory/editcategory.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +49,12 @@ import { DeleteuserComponent } from './pages/user/deleteuser/deleteuser.componen
     HomeComponent,
     LogoutComponent,
     DeleteproductComponent,
-    DeleteuserComponent
+    DeleteuserComponent,
+    AddcategoryComponent,
+    AllcategoriesComponent,
+    DelcategoryComponent,
+    ProductsComponent,
+    EditcategoryComponent
   ],
   imports: [
     BrowserModule,

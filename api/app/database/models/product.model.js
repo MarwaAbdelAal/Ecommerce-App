@@ -27,11 +27,11 @@ const productSchema = mongoose.Schema({
         required: true,
         ref: "User" // relation to user model
     },
-    // categoryId:{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     required: true,
-    //     ref: "Category"
-    // },
+    categoryId:{
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "Category"
+    },
 },{
     timestamps: true
 })
