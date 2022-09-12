@@ -23,13 +23,14 @@ export class AllcategoriesComponent implements OnInit {
   getMyData(){
     this._category.getAllCategories().subscribe(
       data=>{
-        console.log(data.data)
+        // console.log(data.data)
         this.categories = data.data
       },
-      err=>{
-        console.log(err)
-        this.errMsg = err.message
+      e=>{
+        console.log(e.message)
+        this.errMsg = e.message
         this._auth.isLoggedin = false
+        this.isLoaded=true
       },
       ()=>{
         this.isLoaded = true

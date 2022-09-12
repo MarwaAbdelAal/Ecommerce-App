@@ -18,6 +18,9 @@ export class CategoryService {
   addCategory(data: Category):Observable<any>{
     return this._http.post(`${this.baseUrl}add`, data)
   }
+  singleCategory(id: string):Observable<any>{
+    return this._http.get(`${this.baseUrl}single/${id}`)
+  }
   delCategory(id: string):Observable<any>{
     return this._http.delete(`${this.baseUrl}single/${id}`)
   }

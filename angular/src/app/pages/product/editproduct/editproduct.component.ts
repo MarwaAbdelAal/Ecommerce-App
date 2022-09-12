@@ -17,8 +17,6 @@ export class EditproductComponent implements OnInit {
   file:any
   myData:FormData = new FormData()
 
-// baseUrl = "http://localhost:3000/"
-
   editForm:FormGroup = new FormGroup({
     title: new FormControl("", [Validators.required]),
     desc: new FormControl("", [Validators.required]),
