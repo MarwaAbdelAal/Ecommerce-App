@@ -21,6 +21,7 @@ export class EditproductComponent implements OnInit {
     title: new FormControl("", [Validators.required]),
     desc: new FormControl("", [Validators.required]),
     price: new FormControl("", [Validators.required]),
+    categoryId: new FormControl("", [Validators.required])
   });
 
   constructor(private _data:ProductService, private _router:Router, private _activatedRoute:ActivatedRoute, private _auth:AuthService) { }
@@ -34,6 +35,10 @@ export class EditproductComponent implements OnInit {
   get price() {
   return this.editForm.get("price");
   }
+  get categoryId() {
+    return this.editForm.get("categoryId");
+  }
+
   ngOnInit(): void {
     this.id = this._activatedRoute.snapshot.params["id"] //req.params.id
     this.getSingle()
@@ -51,6 +56,7 @@ export class EditproductComponent implements OnInit {
               if (e.error.message.includes("title")) this.errMsg.title = e.error.data.errors.title.message;
               if (e.error.message.includes("desc")) this.errMsg.desc = e.error.data.errors.desc.message;
               if (e.error.message.includes("price")) this.errMsg.price = e.error.data.errors.price.message;
+              if(e.error.message.includes("categoryId")) this.errMsg.categoryId = e.error.data.errors.categoryId.message
               console.log(e.error);
           },
           () => {

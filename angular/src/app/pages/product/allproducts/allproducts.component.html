@@ -6,14 +6,15 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title mt-3">{{product.title}}</h5>
-                <p class="card-subtitle text-muted">details: {{product.desc}}</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Category: </strong>{{product.categoryName}}</li>
-                <li class="list-group-item"><strong>Price: </strong>{{product.price}}</li>
+                <li class="list-group-item" *ngIf="product.categoryId"><strong>Category: </strong>{{product.categoryId.name}}</li>
+                <li class="list-group-item">
+                    <span class="price-symbol">EGP</span>
+                    <span class="price-whole">{{product.price}}</span></li>
             </ul>
               <div class="card-body">
-                <button routerLink="/product/single/view/{{product._id}}" class="card-link btn btn-warning">View</button>
+                <button routerLink="/product/single/view/{{product._id}}" class="card-link btn btn-warning">Add to cart</button>
               </div>
         </div>
     </div>

@@ -1,4 +1,6 @@
-<form [formGroup]="productForm" (ngSubmit)="handleProduct()">
+<h1 class="mb-3">Add New Product</h1>
+
+<form class="m-3" [formGroup]="productForm" (ngSubmit)="handleProduct()">
     <div class="row">
         <div class="mb-3">
             <input class="form-control" placeholder="title" formControlName="title" >
@@ -23,6 +25,18 @@
             </div>
             <div class="alert alert-danger" *ngIf="errMsg.price">{{errMsg.price}}</div>
         </div>
+
+        <div class="mb-3">
+            <label>Category</label>
+            <select class="form-select" formControlName="categoryId">
+                <option selected value="631d71a366d586fbde5f6aee">Make up</option>
+                <option value="bags">Bags</option>
+            </select>
+            <div class="alert alert-danger" *ngIf="errMsg.categoryId">{{errMsg.categoryId}}, 
+                <span *ngIf="categoryId?.['errors']?.['required']">categoryId is required</span>
+            </div>
+        </div>
+        
         <div class="mb-3">
             <button class="btn btn-info">Add Product</button>
         </div>

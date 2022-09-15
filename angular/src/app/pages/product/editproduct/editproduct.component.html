@@ -23,6 +23,19 @@
             </div>
             <div class="alert alert-danger" *ngIf="errMsg.price">{{errMsg.price}}</div>
         </div>
+
+        <div class="mb-3">
+            <label>Category</label>
+            <select class="form-select" formControlName="categoryId">
+                <option selected value="631d71a366d586fbde5f6aee">Make up</option>
+                <option value="bags">Bags</option>
+                <option value="bags">Shoes</option>
+            </select>
+            <div class="alert alert-danger" *ngIf="errMsg.categoryId">{{errMsg.categoryId}}, 
+                <span *ngIf="categoryId?.['errors']?.['required']">categoryId is required</span>
+            </div>
+        </div>
+        
         <div class="mb-3">
             <input type="file" class="form-control" name="productImg" (change)="onChangeImg($event)">
         </div>

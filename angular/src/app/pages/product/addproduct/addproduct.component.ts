@@ -1,3 +1,4 @@
+import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
@@ -18,6 +19,7 @@ export class AddproductComponent implements OnInit {
       title: new FormControl("", [Validators.required]),
       desc: new FormControl("", [Validators.required]),
       price: new FormControl("", [Validators.required]),
+      categoryId: new FormControl("", [Validators.required])
   });
 
   constructor(private _data:ProductService, private _router:Router) { }
@@ -30,6 +32,9 @@ export class AddproductComponent implements OnInit {
   }
   get price() {
     return this.productForm.get("price");
+  }
+  get categoryId() {
+    return this.productForm.get("categoryId");
   }
 
 ngOnInit(): void { }
@@ -45,6 +50,7 @@ handleProduct() {
             if(e.error.message.includes("title")) this.errMsg.title = e.error.data.errors.title.message
             if(e.error.message.includes("desc")) this.errMsg.desc = e.error.data.errors.desc.message
             if(e.error.message.includes("price")) this.errMsg.price = e.error.data.errors.price.message
+            if(e.error.message.includes("categoryId")) this.errMsg.categoryId = e.error.data.errors.categoryId.message
             console.log(e.error)
         },
         () => {
