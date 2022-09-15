@@ -4,19 +4,18 @@ const categorySchema = mongoose.Schema({
     name:{
         type: String,
         trim: true,
-        lowercase: true,
         unique: true,
         required: true,
     },
     categoryImg:{
         type: String,
         default: "defaultProduct.png"
-    }
+    },
 })
 
 // relation with products model with categoryId
 categorySchema.virtual("products", {
-    ref: "Product", // name of the ralated model
+    ref: "Product", // name of the related model
     localField: "_id",
     foreignField: "categoryId"
 })

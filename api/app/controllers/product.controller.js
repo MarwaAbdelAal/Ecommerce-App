@@ -3,7 +3,11 @@ const productModel = require("../database/models/product.model")
 class Product{
     static getAllProducts = async(req, res)=>{ //localhost:3000/product/
         try {
-            const data = await productModel.find()
+            // const data = await productModel.find()
+            const data = await productModel
+            .find()
+            .populate('categoryId')
+            // console.log(data)
             res.status(200).send({apiStatus: true, message: "all products fetched", data})
         } 
         catch (e) {
@@ -25,7 +29,7 @@ class Product{
     }
     static singleProduct = async(req, res)=>{
         try {
-            const data = await productModel.findById(req.params.id)
+            const data = await productModel.findById(req.params.id).populate("categoryId")
             res.status(200).send({apiStatus: true, message: "single Product", data})
         } 
         catch (e) {
@@ -38,7 +42,7 @@ class Product{
                 req.params.id,
                 req.body, 
                 {runValidator:true})
-            const data = await productModel.findById(req.params.id)
+            const data = await productModel.findById(req.params.id).populate("categoryId")
             res.status(200).send({apiStatus: true, message: "Product edited", data})
         } 
         catch (e) {
@@ -56,7 +60,7 @@ class Product{
     }
     static getMyProducts = async(req,res)=>{
         try {
-            const data = await productModel.find({userId:req.user._id})
+            const data = await productModel.find({userId:req.user._id}).populate("categoryId")
             res.status(200).send({apiStatus: true, message: "My products fetched", data})
         } 
         catch (e) {
@@ -81,7 +85,7 @@ class Product{
                 req.params.id,
                 { productImg },
             )
-            const data = await productModel.findById(req.params.id)
+            const data = await productModel.findById(req.params.id).populate("categoryId")
             res.status(200).send({apiStatus: true, message: "Image uploaded", data})
         } 
         catch (e) {
