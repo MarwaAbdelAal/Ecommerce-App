@@ -27,13 +27,14 @@
         <div class="mb-3">
             <label>Category</label>
             <select class="form-select" formControlName="categoryId">
-                <option selected value="631d71a366d586fbde5f6aee">Make up</option>
-                <option value="bags">Bags</option>
-                <option value="bags">Shoes</option>
+                <option value="" disabled>Choose Category</option>
+                <option *ngFor="let category of categories" [ngValue]="category">{{category.name}}
+                </option>
             </select>
-            <div class="alert alert-danger" *ngIf="errMsg.categoryId">{{errMsg.categoryId}}, 
-                <span *ngIf="categoryId?.['errors']?.['required']">categoryId is required</span>
+            <div *ngIf="categoryId?.['invalid'] && (categoryId?.['dirty'] || categoryId?.['touched'])" class="alert alert-danger">
+                <span *ngIf="categoryId?.['errors']?.['required']">Category is required</span>
             </div>
+            <div class="alert alert-danger" *ngIf="errMsg.categoryId">{{errMsg.categoryId}}</div>
         </div>
         
         <div class="mb-3">

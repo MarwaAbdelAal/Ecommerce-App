@@ -1,8 +1,8 @@
-import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product';
+import { CategoryService } from 'src/app/providers/services/category.service';
 import { ProductService } from 'src/app/providers/services/product.service';
 
 @Component({
@@ -13,6 +13,7 @@ import { ProductService } from 'src/app/providers/services/product.service';
 export class AddproductComponent implements OnInit {
 
   errMsg: any = {}
+  categories: any[] = []
   // baseUrl = "http://localhost:3000/"
 
   productForm:FormGroup = new FormGroup({
@@ -22,8 +23,9 @@ export class AddproductComponent implements OnInit {
       categoryId: new FormControl("", [Validators.required])
   });
 
-  constructor(private _data:ProductService, private _router:Router) { }
+  constructor(private _data:ProductService, private _router:Router, private _category:CategoryService) { }
 
+  // Access formcontrols getter
   get title() {
     return this.productForm.get("title");
   }
@@ -37,26 +39,39 @@ export class AddproductComponent implements OnInit {
     return this.productForm.get("categoryId");
   }
 
-ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.getCategories()
+  }
 
-handleProduct() {
+  handleProduct() {
     let productData: Product = this.productForm.value
     console.log(productData)
     this._data.addProduct(productData).subscribe(
-        res=>{
-            console.log(res)
-        },
-        e =>{
-            if(e.error.message.includes("title")) this.errMsg.title = e.error.data.errors.title.message
-            if(e.error.message.includes("desc")) this.errMsg.desc = e.error.data.errors.desc.message
-            if(e.error.message.includes("price")) this.errMsg.price = e.error.data.errors.price.message
-            if(e.error.message.includes("categoryId")) this.errMsg.categoryId = e.error.data.errors.categoryId.message
-            console.log(e.error)
-        },
-        () => {
-            this._router.navigateByUrl("product/myproducts")
-        }
+      res=>{
+        console.log(res)
+      },
+      e =>{
+        if(e.error.message.includes("title")) this.errMsg.title = e.error.data.errors.title.message
+        if(e.error.message.includes("desc")) this.errMsg.desc = e.error.data.errors.desc.message
+        if(e.error.message.includes("price")) this.errMsg.price = e.error.data.errors.price.message
+        if(e.error.message.includes("categoryId")) this.errMsg.categoryId = e.error.data.errors.categoryId.message
+        console.log(e.error)
+      },
+      () => {
+        this._router.navigateByUrl("product/myproducts")
+      }
     )
-}
+  }
 
+  getCategories(){
+    this._category.getAllCategories().subscribe(
+      res => {
+        // console.log(res.data)
+        this.categories = res.data
+      },
+      e => {
+        console.log(e)
+      }
+    )
+  }
 }

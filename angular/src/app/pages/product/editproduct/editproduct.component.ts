@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/providers/services/auth.service';
+import { CategoryService } from 'src/app/providers/services/category.service';
 import { ProductService } from 'src/app/providers/services/product.service';
 
 @Component({
@@ -13,6 +14,8 @@ export class EditproductComponent implements OnInit {
 
   errMsg: any = {};
   product: any = {}
+  selectedCategory: any = {}
+  categories: any[] = []
   id: any
   file:any
   myData:FormData = new FormData()
@@ -24,7 +27,7 @@ export class EditproductComponent implements OnInit {
     categoryId: new FormControl("", [Validators.required])
   });
 
-  constructor(private _data:ProductService, private _router:Router, private _activatedRoute:ActivatedRoute, private _auth:AuthService) { }
+  constructor(private _data:ProductService, private _router:Router, private _activatedRoute:ActivatedRoute, private _auth:AuthService, private _category:CategoryService) { }
 
   get title() {
   return this.editForm.get("title");
@@ -42,6 +45,7 @@ export class EditproductComponent implements OnInit {
   ngOnInit(): void {
     this.id = this._activatedRoute.snapshot.params["id"] //req.params.id
     this.getSingle()
+    this.getCategories()
   }
 
   handleEdit(){
@@ -70,12 +74,27 @@ export class EditproductComponent implements OnInit {
     this._data.getSingleProduct(this.id).subscribe(
       result => {
         this.product = result.data
+        // console.log(this.product)
+        // console.log(this.product.categoryId)
+        this.selectedCategory = this.product.categoryId
         this.editForm.patchValue(result.data)
       },
       e => {
         this.errMsg = e.message
       },
       () => { // finish
+      }
+    )
+  }
+
+  getCategories(){
+    this._category.getAllCategories().subscribe(
+      res => {
+        // console.log(res.data)
+        this.categories = res.data
+      },
+      e => {
+        console.log(e)
       }
     )
   }
