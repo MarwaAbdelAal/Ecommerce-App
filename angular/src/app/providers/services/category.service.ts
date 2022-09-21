@@ -15,7 +15,7 @@ export class CategoryService {
   getAllCategories():Observable<any>{
     return this._http.get(`${this.baseUrl}`)
   }
-  addCategory(data: Category):Observable<any>{
+  addCategory(data: any):Observable<any>{
     return this._http.post(`${this.baseUrl}add`, data)
   }
   singleCategory(id: string):Observable<any>{

@@ -18,6 +18,9 @@
         <li class="nav-item" *ngIf="_auth.isLoggedin">
             <a class="nav-link" routerLink="/product/add" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Add Product</a>
         </li>
+        <li class="nav-item" *ngIf="_auth.isLoggedin">
+            <a class="nav-link" routerLink="/category/add" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact:true}">Add Category</a>
+        </li>
     </ul>
     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item" *ngIf="!_auth.isLoggedin">

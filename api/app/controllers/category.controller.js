@@ -12,7 +12,15 @@ class Category{
     }
     static addCategory = async(req, res)=>{
         try {
-            const data = new categoryModel(req.body)
+            let data;
+            if(req.file){
+                let categoryImg = req.file.filename
+                data = new categoryModel({categoryImg, ...req.body})
+            }
+            else{
+                data = new categoryModel(req.body)
+            }
+            console.log(data)
             await data.save()
             res.status(200).send({apiStatus: true, message: "New category added", data})
         } 
